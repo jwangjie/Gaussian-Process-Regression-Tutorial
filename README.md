@@ -1,9 +1,9 @@
 
 # Gaussian Process, be comfortable using it
 
-<div style="text-align: right"> Jie Wang, jie.wang@queensu.ca </div>
+[Jie Wang](mailto:jie.wang@queensu.ca), [Offroad Robotics](https://offroad.engineering.queensu.ca/), Queen's University, Kingston, Canada
 
-You can execute the whole notebook at
+The whole notebook can be executed at
 
 <a href="https://colab.research.google.com/github/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/gpr_tutorial.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
@@ -11,7 +11,7 @@ The audience of this tutorial is the one who wants to use GP but not feels comfo
 
 One thing I realized the difficulties in understanding GP is due to background varies, everyone has different knowledge. To understand GP, even to the intuitive level, needs to know multivariable Gaussian, kernel, conditional probability. If you familiar with these, start reading from [Math](#III.-Math). Entry or medium-level in deep learning (application level), without a solid understanding in machine learning theory, even cause more confusion in understanding GP. 
 
-## I.	Motivation
+## I.   Motivation
 
 First of all, why use Gaussian Process to do regression? Or even, what is regression? Regression is a common machine learning task that can be described as Given some observed data points (training dataset), finding a function that represents the dataset as close as possible, then using the function to make predictions at new data points. Regression can be conducted with polynomials, and it's common there is more than one possible function that fits the observed data. Besides getting predictions by the function, we also want to know how certain these predictions are. Moreover, quantifying uncertainty is super valuable to achieve an efficient learning process. The areas with the least certainty should be explored more. 
 
@@ -19,12 +19,12 @@ In a word, GP can be used to make predictions at new data points and can tell us
 
 <div id="image-table">
     <table>
-	    <tr>
-    	    <td style="padding:10px">
-        	    <img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/regression1.png?raw=1" width="400"/> [2]
-      	    </td>
+        <tr>
             <td style="padding:10px">
-            	<img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/regression2.png?raw=1" width="550"/>
+                <img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/regression1.png?raw=1" width="400"/> [2]
+            </td>
+            <td style="padding:10px">
+                <img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/regression2.png?raw=1" width="550"/>
             </td>
         </tr>
     </table>
@@ -32,7 +32,7 @@ In a word, GP can be used to make predictions at new data points and can tell us
 
 ## II. Basics 
 
-### A.	Gaussian (Normal) Distribution  
+### A.  Gaussian (Normal) Distribution  
 
 Let's talk about Gaussian. 
 
@@ -71,12 +71,8 @@ plt.ylabel('P(x)')
 plt.show()
 ```
 
-    C:\Anaconda3\lib\site-packages\matplotlib\axes\_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
-    
 
-
-![png](output_10_1.png)
+![png](/img/codes_plot_output/output_10_1.png)
 
 
 We generated data points that follow the normal distribution. On the other hand, we can model data points, assume these points are Gaussian, model as a function, and do regression using it. As shown above, a kernel density and histogram of the generated points were estimated. The kernel density estimation looks a normal distribution due to there are plenty `(m=1000)` observation points to get this Gaussian looking PDF. In regression, even we don't have that many observation data, we can model the data as a function that follows a normal distribution if we assume a Gaussian prior. 
@@ -105,7 +101,7 @@ plt.show()
 ```
 
 
-![png](output_14_0.png)
+![png](/img/codes_plot_output/output_14_0.png)
 
 
 It's clear that the vector <img src="/tex/4a0dab614eaf1e6dc58146666d67ace8.svg?invert_in_darkmode&sanitize=true" align=middle width=20.17129784999999pt height=22.465723500000017pt/> is Gaussian. It looks like we did nothing but vertically plot the vector points <img src="/tex/4a0dab614eaf1e6dc58146666d67ace8.svg?invert_in_darkmode&sanitize=true" align=middle width=20.17129784999999pt height=22.465723500000017pt/>. 
@@ -127,7 +123,7 @@ plt.show()
 ```
 
 
-![png](output_16_0.png)
+![png](/img/codes_plot_output/output_16_0.png)
 
 
 Keep in mind that both vecotr <img src="/tex/4a0dab614eaf1e6dc58146666d67ace8.svg?invert_in_darkmode&sanitize=true" align=middle width=20.17129784999999pt height=22.465723500000017pt/> and <img src="/tex/f6fac43e354f1b2ca85658091df26df1.svg?invert_in_darkmode&sanitize=true" align=middle width=20.17129784999999pt height=22.465723500000017pt/> are Gaussian. 
@@ -152,7 +148,7 @@ plt.show()
 ```
 
 
-![png](output_19_0.png)
+![png](/img/codes_plot_output/output_19_0.png)
 
 
 Going back to think about regression. These lines look like **functions** for each pair of points. On the other hand, the plot also looks like we are sampling the region <img src="/tex/e88c070a4a52572ef1d5792a341c0900.svg?invert_in_darkmode&sanitize=true" align=middle width=32.87674994999999pt height=24.65753399999998pt/> with 10 linear functions even there are only two points on each line. In the sampling perspective, the <img src="/tex/e88c070a4a52572ef1d5792a341c0900.svg?invert_in_darkmode&sanitize=true" align=middle width=32.87674994999999pt height=24.65753399999998pt/> domain is our region of interest, i.e. the specific region we do our regression. This sampling looks even more clear if we generate more independent Gaussian and connecting points in order by lines. 
@@ -173,7 +169,7 @@ plt.show()
 ```
 
 
-![png](output_21_0.png)
+![png](/img/codes_plot_output/output_21_0.png)
 
 
 Wait for a second, what we are trying to do by connecting random generated independent Gaussian points? Even these lines look like functions, but they are too noisy. If <img src="/tex/cbfb1b2a33b28eab8a3e59464768e810.svg?invert_in_darkmode&sanitize=true" align=middle width=14.908688849999992pt height=22.465723500000017pt/> is our input space, these functions are meaningless for the regression task. We can do no prediction by using these functions. The functions should be smoother, meaning input points that are close to each other should have similar values of the function. 
@@ -190,12 +186,12 @@ The <img src="/tex/7c91fa1fa7be856b248f729bd78b5f6f.svg?invert_in_darkmode&sanit
 
 <div id="image-table">
     <table>
-	    <tr>
-    	    <td style="padding:10px">
-        	    <img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/2d_gaussian3D_0.8.png?raw=1" width="400"/>
-      	    </td>
+        <tr>
             <td style="padding:10px">
-            	<img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/2d_gaussian_0.8.png?raw=1" width="350"/>
+                <img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/2d_gaussian3D_0.8.png?raw=1" width="400"/>
+            </td>
+            <td style="padding:10px">
+                <img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/2d_gaussian_0.8.png?raw=1" width="350"/>
             </td>
         </tr>
     </table>
@@ -240,7 +236,7 @@ plt.show()
 ```
 
 
-![png](output_29_0.png)
+![png](/img/codes_plot_output/output_29_0.png)
 
 
 Another good MVN visualization is [Multivariante Gaussians and Mixtures of Gaussians (MoG)](https://www.cs.toronto.edu/~guerzhoy/411/lec/W08/MoG.html).
@@ -278,7 +274,7 @@ plt.show()
 ```
 
 
-![png](output_35_0.png)
+![png](/img/codes_plot_output/output_35_0.png)
 
 
 We got exactly the same plot as expected. Now let's kernelizing our funcitons by use the RBF as our convariace. 
@@ -318,7 +314,7 @@ plt.show()
 ```
 
 
-![png](output_38_0.png)
+![png](/img/codes_plot_output/output_38_0.png)
 
 
 We get much smoother lines and looks even more like functions. When the dimension of Gaussian gets larger, there is no need to connect points. When the dimension become infinity, there is a point represents any possible input. Let's plot `m=200` samples of `n=200`<img src="/tex/9a147fe833cc6eda5be947035d6cc8aa.svg?invert_in_darkmode&sanitize=true" align=middle width=26.851664399999994pt height=22.465723500000017pt/> Gaussian to get a feeling of functions with infinity parameters.  
@@ -356,7 +352,7 @@ plt.show()
 
 
 
-![png](output_40_1.png)
+![png](/img/codes_plot_output/output_40_1.png)
 
 
 As we can see above, when we increase the dimension of Gaussian to infinity, we can sample all the possible points in our region of interest. 
@@ -391,7 +387,7 @@ plt.show()
 ```
 
 
-![png](output_44_0.png)
+![png](/img/codes_plot_output/output_44_0.png)
 
 
 ## III. Math
@@ -483,7 +479,7 @@ plt.show()
 ```
 
 
-![png](output_59_0.png)
+![png](/img/codes_plot_output/output_59_0.png)
 
 
 
@@ -543,7 +539,7 @@ plt.show()
 ```
 
 
-![png](output_62_0.png)
+![png](/img/codes_plot_output/output_62_0.png)
 
 
 
@@ -568,7 +564,7 @@ plt.show()
 
 
 
-![png](output_63_1.png)
+![png](/img/codes_plot_output/output_63_1.png)
 
 
 We plotted `m=40` samples from the Gaussian Process posterior together with the mean function for prediction and the observation data points (training dataset). It's clear all posterior functions collapse at all observation points. 
@@ -594,23 +590,23 @@ A Gaussian process (GP) is a probability distribution over possible functions th
 
 ## Reference
 
-[1]	C. E. Rasmussen and C. K. I. Williams, Gaussian processes for machine learning. MIT Press, 2006.
+[1] C. E. Rasmussen and C. K. I. Williams, Gaussian processes for machine learning. MIT Press, 2006.
 
 [2] R. Turner, “ML Tutorial: Gaussian Processes - YouTube,” 2017. [Online]. Available: https://www.youtube.com/watch?v=92-98SYOdlY&feature=emb_title.
 
 [3] A. Ng, “Multivariate Gaussian Distribution - Stanford University | Coursera,” 2015. [Online]. Available: https://www.coursera.org/learn/machine-learning/lecture/Cf8DF/multivariate-gaussian-distribution.
 
-[4]	D. Lee, “Multivariate Gaussian Distribution - University of Pennsylvania | Coursera,” 2017. [Online]. Available: https://www.coursera.org/learn/robotics-learning/lecture/26CFf/1-3-1-multivariate-gaussian-distribution.
+[4] D. Lee, “Multivariate Gaussian Distribution - University of Pennsylvania | Coursera,” 2017. [Online]. Available: https://www.coursera.org/learn/robotics-learning/lecture/26CFf/1-3-1-multivariate-gaussian-distribution.
 
-[5]	F. Dai, Machine Learning Cheat Sheet: Classical equations and diagrams in machine learning. 2017.
+[5] F. Dai, Machine Learning Cheat Sheet: Classical equations and diagrams in machine learning. 2017.
 
-[6]	N. de Freitas, “Machine learning - Introduction to Gaussian processes - YouTube,” 2013. [Online]. Available: https://www.youtube.com/watch?v=4vGiHC35j9s&t=1424s.
+[6] N. de Freitas, “Machine learning - Introduction to Gaussian processes - YouTube,” 2013. [Online]. Available: https://www.youtube.com/watch?v=4vGiHC35j9s&t=1424s.
 
-[7]	Y. Shi, “Gaussian Process, not quite for dummies,” 2019. [Online]. Available: https://yugeten.github.io/posts/2019/09/GP/.
+[7] Y. Shi, “Gaussian Process, not quite for dummies,” 2019. [Online]. Available: https://yugeten.github.io/posts/2019/09/GP/.
 
-[8]	D. Duvenaud, “Kernel Cookbook,” 2014. [Online]. Available: https://www.cs.toronto.edu/~duvenaud/cookbook/.
+[8] D. Duvenaud, “Kernel Cookbook,” 2014. [Online]. Available: https://www.cs.toronto.edu/~duvenaud/cookbook/.
 
-[9]	Y. Gal, “What my deep model doesn’t know.,” 2015. [Online]. Available: http://mlg.eng.cam.ac.uk/yarin/blog_3d801aa532c1ce.html.
+[9] Y. Gal, “What my deep model doesn’t know.,” 2015. [Online]. Available: http://mlg.eng.cam.ac.uk/yarin/blog_3d801aa532c1ce.html.
 
 ## Appendix A
 
@@ -681,5 +677,5 @@ plt.show()
 ```
 
 
-![png](output_72_0.png)
+![png](/img/codes_plot_output/output_72_0.png)
 
