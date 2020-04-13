@@ -578,7 +578,28 @@ where <img src="/tex/127335a9fdbeac98b11620d6cfd8ecea.svg?invert_in_darkmode&san
 
 More complex kernel functions can be selected to depend on the specific tasks. More information about choosing the kernel/covariance function for a Gaussian process can be found in `The Kernel Cookbook` [8]. 
 
-## V. Summary
+## V. GP Packages
+
+There are several packages or frameworks available to conduct Gaussian Process Regression. In this section, I will summarize my initial impression after trying several of them written in Python. 
+
+A lightweight one is [sklearn.gaussian_process](https://scikit-learn.org/stable/modules/gaussian_process.html), simple implementation like the example above can be quickly conducted. Just for gaining more implementation understandings of GP after the above simple implementation example. It's too vague for understanding GP theory purpose. 
+
+GPR is computationally expensive in high dimensional spaces (features more than a few dozens) due to the fact it uses the whole samples/features to do the predictions. The more observations, the more computations are needed for predictions. A package that includes state-of-the-art algorithm implementations is preferred for efficient implementation of complex GPR tasks.
+
+One of the most well-known GP frameworks is [GPy](https://sheffieldml.github.io/GPy/). GPy has been developed pretty maturely with well-documented explanations. GPy uses NumPy to perform all its computations. For tasks that don't require heavy computations and very up-to-date algorithm implementations, GPy is sufficient and the more stable. 
+
+For bigger computation required GPR tasks, GPU acceleration are especially preferred. [GPflow](https://www.gpflow.org/) origins from GPy, and much of the interface is similar. GPflow leverages **TensorFlow** as its computational backend. More technical difference between GPy and GPflow frameworks is [here](https://gpflow.readthedocs.io/en/master/intro.html#what-s-the-difference-between-gpy-and-gpflow). 
+
+[GPyTorch](https://gpytorch.ai/) is another framework that provides GPU acceleration through **PyTorch**. It contains very up-to-date GP algorithms. Similar to GPflow, GPyTorch provides automatic gradients. So complex models such as embedding deep NNs in GP models can be easier developed. 
+
+After going through docs quickly and implementing basic GPR tutorials of [GPyTorch](https://github.com/jwangjie/gpytorch/blob/master/examples/01_Exact_GPs/Simple_GP_Regression.ipynb) and [GPflow](https://github.com/jwangjie/gpytorch/blob/master/examples/01_Exact_GPs/Simple_GP_Regression_GPflow.ipynb), my impression is using GPyTorch is more automatic and GPflow has more controls. The impression may also come from the usage experience with TensorFlow and PyTorch. 
+
+Check and run my ***modified*** GPR tutorials of 
+* [GPyTorch](https://github.com/jwangjie/gpytorch/blob/master/examples/01_Exact_GPs/Simple_GP_Regression.ipynb) 
+
+* [GPflow](https://github.com/jwangjie/gpytorch/blob/master/examples/01_Exact_GPs/Simple_GP_Regression_GPflow.ipynb)
+
+## VI. Summary
 
 A Gaussian process (GP) is a probability distribution over possible functions that fit a set of points. [1] GPs are nonparametric models that model the function directly. Thus, GP provides a distribution (with uncertainty) for the prediction value rather than just one value as the prediction. In robot learning, quantifying uncertainty can be extremely valuable to achieve an efficient learning process. The areas with least certain should be explored next. This is the main idea behind Bayesian optimization. [9] Moreover, prior knowledge and specifications about the shape of the model can be added by selecting different kernel functions. [1] Priors can be specified based on criteria including if the model is smooth, if it is sparse, if it is able to change drastically, and if it need to be differentiable.
 
