@@ -11,6 +11,8 @@ The audience of this tutorial is the one who wants to use GP but not feels comfo
 
 One thing I realized the difficulties in understanding GP is due to background varies, everyone has different knowledge. To understand GP, even to the intuitive level, needs to know multivariable Gaussian, kernel, conditional probability. If you familiar with these, start reading from [III. Math](#III.-Math). Entry or medium-level in deep learning (application level), without a solid understanding in machine learning theory, even cause more confusion in understanding GP. 
 
+<img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/gpr_animation_wide.gif?raw=1" width="1000"/> [10]
+
 ## I.   Motivation
 
 First of all, why use Gaussian Process to do regression? Or even, what is regression? Regression is a common machine learning task that can be described as Given some observed data points (training dataset), finding a function that represents the dataset as close as possible, then using the function to make predictions at new data points. Regression can be conducted with polynomials, and it's common there is more than one possible function that fits the observed data. Besides getting predictions by the function, we also want to know how certain these predictions are. Moreover, quantifying uncertainty is super valuable to achieve an efficient learning process. The areas with the least certainty should be explored more. 
@@ -372,10 +374,29 @@ plt.show()
 
 As we can see above, when we increase the dimension of Gaussian to infinity, we can sample all the possible points in our region of interest. 
 
+A great visualization animation of points covariance of the "functions" [10].
+
+<div id="image-table">
+    <table>
+	    <tr>
+    	    <td style="padding:10px">
+        	    <img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/2points_covariance.gif?raw=1" width="500"/>
+      	    </td>
+            <td style="padding:10px">
+            	<img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/4points_covariance.gif?raw=1" width="500"/>
+            </td>
+        </tr>
+    </table>
+</div> 
+
+---
+
 Here we talk a little bit about **Parametric and Nonparametric model**. You can skip this section without compromising your Gaussian Process understandings. 
 
 Parametric models assume that the data distribution can be modeled in terms of a set of finite number parameters. For regression, we have some data points, and we would like to make predictions of the value of <img src="/tex/0e241c321e18ed6141f9a47d8095bebd.svg?invert_in_darkmode&sanitize=true" align=middle width=62.56467194999998pt height=24.65753399999998pt/> with a specific <img src="/tex/332cc365a4987aacce0ead01b8bdcc0b.svg?invert_in_darkmode&sanitize=true" align=middle width=9.39498779999999pt height=14.15524440000002pt/>. If we assume a linear regression model, <img src="/tex/eab7fea88470156cd8aa3e8c1a13158b.svg?invert_in_darkmode&sanitize=true" align=middle width=90.23571974999999pt height=22.831056599999986pt/>, we need to find the parameters <img src="/tex/edcbf8dd6dd9743cceeee21183bbc3b6.svg?invert_in_darkmode&sanitize=true" align=middle width=14.269439249999989pt height=22.831056599999986pt/> and <img src="/tex/f1fe0aebb1c952f09cdbfd83af41f50e.svg?invert_in_darkmode&sanitize=true" align=middle width=14.269439249999989pt height=22.831056599999986pt/> to define the line. In many cases, the linear model assumption isn’t hold, a polynomial model with more parameters, such as <img src="/tex/66e114b7f1f95026b004600d3d19c953.svg?invert_in_darkmode&sanitize=true" align=middle width=141.36579765pt height=26.76175259999998pt/> is needed. We use the training dataset <img src="/tex/78ec2b7008296ce0561cf83393cb746d.svg?invert_in_darkmode&sanitize=true" align=middle width=14.06623184999999pt height=22.465723500000017pt/> of <img src="/tex/55a049b8f161ae7cfeb0197d75aff967.svg?invert_in_darkmode&sanitize=true" align=middle width=9.86687624999999pt height=14.15524440000002pt/> observations, <img src="/tex/cad3b7fb49f21edeede8aeb09c8ede11.svg?invert_in_darkmode&sanitize=true" align=middle width=185.8496904pt height=24.65753399999998pt/> to train the model, i.e. mapping <img src="/tex/332cc365a4987aacce0ead01b8bdcc0b.svg?invert_in_darkmode&sanitize=true" align=middle width=9.39498779999999pt height=14.15524440000002pt/> to <img src="/tex/deceeaf6940a8c7a5a02373728002b0f.svg?invert_in_darkmode&sanitize=true" align=middle width=8.649225749999989pt height=14.15524440000002pt/> through parameters <img src="/tex/bacd6bdf70fdf933f86310421df0ab2b.svg?invert_in_darkmode&sanitize=true" align=middle width=107.37431924999999pt height=24.65753399999998pt/>. After the training process, we assume all the information of the data are captured by the feature parameters <img src="/tex/b35e24d8a08c0ab01195f2ad2a78fab7.svg?invert_in_darkmode&sanitize=true" align=middle width=12.785434199999989pt height=22.465723500000017pt/>, thus the prediction is independent of the training data <img src="/tex/78ec2b7008296ce0561cf83393cb746d.svg?invert_in_darkmode&sanitize=true" align=middle width=14.06623184999999pt height=22.465723500000017pt/>. It can be expressed as  <img src="/tex/91b69274abea319e9035079407c050a9.svg?invert_in_darkmode&sanitize=true" align=middle width=225.68921594999998pt height=24.65753399999998pt/>, in which <img src="/tex/4d00376b927ae39d0a206dc721cfc59f.svg?invert_in_darkmode&sanitize=true" align=middle width=14.783181599999988pt height=22.831056599999986pt/> is the prediction made at a unobserved point <img src="/tex/3c832332166b20f879ddebdf25829927.svg?invert_in_darkmode&sanitize=true" align=middle width=16.13018219999999pt height=14.15524440000002pt/>. 
 Thus, conducting regression using the parametric model, the complexity or flexibility of model is limited by the parameter numbers. It’s natural to think to use a model that the number of parameters grows with the size of the dataset, and it’s a Bayesian non-parametric model. Bayesian non-parametric model do not imply that there are no parameters, but rather infinitely parameters. 
+
+---
 
 To generate correlated normally distributed random samples, one can first generate uncorrelated samples, and then multiply them
 by a matrix *L* such that <img src="/tex/3a7e011fcce2798d8f8a0d1c26dc920c.svg?invert_in_darkmode&sanitize=true" align=middle width=69.7847139pt height=27.6567522pt/>, where *K* is the desired covariance matrix. *L* can be created, for example, by using 
