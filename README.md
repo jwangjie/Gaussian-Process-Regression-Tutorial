@@ -241,6 +241,21 @@ plt.show()
 
 Another good MVN visualization is [Multivariante Gaussians and Mixtures of Gaussians (MoG)](https://www.cs.toronto.edu/~guerzhoy/411/lec/W08/MoG.html).
 
+Besides the joint probalility, we are more interested to the conditional probability. If we cut a slice on the 3D bell curve or draw a line on the elipse contour, we got the conditional probability distribution $P(x_1 \vert \, x_2)$. The conditional distribution is also Gaussian. 
+
+<div id="image-table">
+    <table>
+	    <tr>
+    	    <td style="padding:10px">
+        	    <img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/2d_gaussian_conditional3D.png?raw=1" width="400"/>
+      	    </td>
+            <td style="padding:10px">
+            	<img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/2d_gaussian_conditional.png?raw=1" width="300"/>
+            </td>
+        </tr>
+    </table>
+</div> 
+
 ### C. Kernals 
 
 We want to smooth the sampling functions by defining the covariance functions. Considering the fact that when two vectors are similar, their dot product output value is high. It is very clear to see this in the dot product equation <img src="/tex/d920595d94866be7b9fe83844a059fba.svg?invert_in_darkmode&sanitize=true" align=middle width=109.60221524999999pt height=22.831056599999986pt/>, where <img src="/tex/27e556cf3caa0673ac49a8f0de3c73ca.svg?invert_in_darkmode&sanitize=true" align=middle width=8.17352744999999pt height=22.831056599999986pt/> is the angle between two vectors. If an algorithm is defined solely in terms of inner products in input space then it can be lifted into feature space by replacing occurrences of those inner products by <img src="/tex/eee7a5f78ba55222c59c939ac23b417c.svg?invert_in_darkmode&sanitize=true" align=middle width=58.04797349999999pt height=24.7161288pt/>; we call <img src="/tex/5d01d8b29b1de37fa1d298968821c94f.svg?invert_in_darkmode&sanitize=true" align=middle width=45.60509744999999pt height=24.65753399999998pt/> a kernel function [1]. 
