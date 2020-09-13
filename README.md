@@ -1,19 +1,17 @@
 
 # Gaussian Process, be comfortable using it
 
-[Jie Wang](mailto:jie.wang@queensu.ca), [Offroad Robotics](https://offroad.engineering.queensu.ca/), Queen's University, Kingston, Canada
+<div style="text-align: right"> Jie Wang, jie.wang@queensu.ca </div>
 
-The whole notebook can be executed at
+You can execute the whole notebook at
 
 <a href="https://colab.research.google.com/github/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/gpr_tutorial.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 The audience of this tutorial is the one who wants to use GP but not feels comfortable using it. This happens to me after finishing reading the first two chapters of the textbook **Gaussian Process for Machine Learning** [[1](#Reference)]. There is a gap between the usage of GP and feel comfortable using it due to the difficulties in understanding the theory. When I was reading the textbook and watching tutorial videos online, I can follow the majority without too many difficulties. The content kind of makes sense to me. But even when I am trying to talk to myself what GP is, the big picture is blurry. After keep trying to understand GP from various recourses, including textbooks, blog posts, and open-sourced codes, I get my understandings sorted and summarize them up from my perspective. 
 
-One thing I realized the difficulties in understanding GP is due to background varies, everyone has different knowledge. To understand GP, even to the intuitive level, needs to know multivariable Gaussian, kernel, conditional probability. If you familiar with these, start reading from [III. Math](#III.-Math). Entry or medium-level in deep learning (application level), without a solid understanding in machine learning theory, even cause more confusion in understanding GP. 
+One thing I realized the difficulties in understanding GP is due to background varies, everyone has different knowledge. To understand GP, even to the intuitive level, needs to know multivariable Gaussian, kernel, conditional probability. If you familiar with these, start reading from [Math](#III.-Math). Entry or medium-level in deep learning (application level), without a solid understanding in machine learning theory, even cause more confusion in understanding GP. 
 
-<img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/gpr_animation_wide.gif?raw=1" width="1000"/> [10]
-
-## I.   Motivation
+## I.	Motivation
 
 First of all, why use Gaussian Process to do regression? Or even, what is regression? Regression is a common machine learning task that can be described as Given some observed data points (training dataset), finding a function that represents the dataset as close as possible, then using the function to make predictions at new data points. Regression can be conducted with polynomials, and it's common there is more than one possible function that fits the observed data. Besides getting predictions by the function, we also want to know how certain these predictions are. Moreover, quantifying uncertainty is super valuable to achieve an efficient learning process. The areas with the least certainty should be explored more. 
 
@@ -21,12 +19,12 @@ In a word, GP can be used to make predictions at new data points and can tell us
 
 <div id="image-table">
     <table>
-        <tr>
+	    <tr>
+    	    <td style="padding:10px">
+        	    <img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/regression1.png?raw=1" width="400"/> [2]
+      	    </td>
             <td style="padding:10px">
-                <img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/regression1.png?raw=1" width="400"/> [2]
-            </td>
-            <td style="padding:10px">
-                <img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/regression2.png?raw=1" width="550"/>
+            	<img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/regression2.png?raw=1" width="550"/>
             </td>
         </tr>
     </table>
@@ -34,7 +32,7 @@ In a word, GP can be used to make predictions at new data points and can tell us
 
 ## II. Basics 
 
-### A.  Gaussian (Normal) Distribution  
+### A.	Gaussian (Normal) Distribution  
 
 Let's talk about Gaussian. 
 
@@ -73,8 +71,12 @@ plt.ylabel('P(x)')
 plt.show()
 ```
 
+    C:\Anaconda3\lib\site-packages\matplotlib\axes\_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
+      warnings.warn("The 'normed' kwarg is deprecated, and has been "
+    
 
-![png](/img/codes_plot_output/output_10_1.png)
+
+![png](output_10_1.png)
 
 
 We generated data points that follow the normal distribution. On the other hand, we can model data points, assume these points are Gaussian, model as a function, and do regression using it. As shown above, a kernel density and histogram of the generated points were estimated. The kernel density estimation looks a normal distribution due to there are plenty `(m=1000)` observation points to get this Gaussian looking PDF. In regression, even we don't have that many observation data, we can model the data as a function that follows a normal distribution if we assume a Gaussian prior. 
@@ -103,7 +105,7 @@ plt.show()
 ```
 
 
-![png](/img/codes_plot_output/output_14_0.png)
+![png](output_14_0.png)
 
 
 It's clear that the vector <img src="/tex/4a0dab614eaf1e6dc58146666d67ace8.svg?invert_in_darkmode&sanitize=true" align=middle width=20.17129784999999pt height=22.465723500000017pt/> is Gaussian. It looks like we did nothing but vertically plot the vector points <img src="/tex/4a0dab614eaf1e6dc58146666d67ace8.svg?invert_in_darkmode&sanitize=true" align=middle width=20.17129784999999pt height=22.465723500000017pt/>. 
@@ -125,7 +127,7 @@ plt.show()
 ```
 
 
-![png](/img/codes_plot_output/output_16_0.png)
+![png](output_16_0.png)
 
 
 Keep in mind that both vecotr <img src="/tex/4a0dab614eaf1e6dc58146666d67ace8.svg?invert_in_darkmode&sanitize=true" align=middle width=20.17129784999999pt height=22.465723500000017pt/> and <img src="/tex/f6fac43e354f1b2ca85658091df26df1.svg?invert_in_darkmode&sanitize=true" align=middle width=20.17129784999999pt height=22.465723500000017pt/> are Gaussian. 
@@ -150,7 +152,7 @@ plt.show()
 ```
 
 
-![png](/img/codes_plot_output/output_19_0.png)
+![png](output_19_0.png)
 
 
 Going back to think about regression. These lines look like **functions** for each pair of points. On the other hand, the plot also looks like we are sampling the region <img src="/tex/e88c070a4a52572ef1d5792a341c0900.svg?invert_in_darkmode&sanitize=true" align=middle width=32.87674994999999pt height=24.65753399999998pt/> with 10 linear functions even there are only two points on each line. In the sampling perspective, the <img src="/tex/e88c070a4a52572ef1d5792a341c0900.svg?invert_in_darkmode&sanitize=true" align=middle width=32.87674994999999pt height=24.65753399999998pt/> domain is our region of interest, i.e. the specific region we do our regression. This sampling looks even more clear if we generate more independent Gaussian and connecting points in order by lines. 
@@ -171,7 +173,7 @@ plt.show()
 ```
 
 
-![png](/img/codes_plot_output/output_21_0.png)
+![png](output_21_0.png)
 
 
 Wait for a second, what we are trying to do by connecting random generated independent Gaussian points? Even these lines look like functions, but they are too noisy. If <img src="/tex/cbfb1b2a33b28eab8a3e59464768e810.svg?invert_in_darkmode&sanitize=true" align=middle width=14.908688849999992pt height=22.465723500000017pt/> is our input space, these functions are meaningless for the regression task. We can do no prediction by using these functions. The functions should be smoother, meaning input points that are close to each other should have similar values of the function. 
@@ -188,12 +190,12 @@ The <img src="/tex/7c91fa1fa7be856b248f729bd78b5f6f.svg?invert_in_darkmode&sanit
 
 <div id="image-table">
     <table>
-        <tr>
+	    <tr>
+    	    <td style="padding:10px">
+        	    <img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/2d_gaussian3D_0.8.png?raw=1" width="400"/>
+      	    </td>
             <td style="padding:10px">
-                <img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/2d_gaussian3D_0.8.png?raw=1" width="400"/>
-            </td>
-            <td style="padding:10px">
-                <img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/2d_gaussian_0.8.png?raw=1" width="350"/>
+            	<img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/2d_gaussian_0.8.png?raw=1" width="350"/>
             </td>
         </tr>
     </table>
@@ -238,25 +240,10 @@ plt.show()
 ```
 
 
-![png](/img/codes_plot_output/output_29_0.png)
+![png](output_29_0.png)
 
 
 Another good MVN visualization is [Multivariante Gaussians and Mixtures of Gaussians (MoG)](https://www.cs.toronto.edu/~guerzhoy/411/lec/W08/MoG.html).
-
-Besides the joint probalility, we are more interested to the conditional probability. If we cut a slice on the 3D bell curve or draw a line on the elipse contour, we got the conditional probability distribution $P(x_1 \vert \, x_2)$. The conditional distribution is also Gaussian. 
-
-<div id="image-table">
-    <table>
-	    <tr>
-    	    <td style="padding:10px">
-        	    <img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/2d_gaussian_conditional3D.png?raw=1" width="400"/>
-      	    </td>
-            <td style="padding:10px">
-            	<img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/2d_gaussian_conditional.png?raw=1" width="300"/>
-            </td>
-        </tr>
-    </table>
-</div> 
 
 ### C. Kernals 
 
@@ -291,7 +278,7 @@ plt.show()
 ```
 
 
-![png](/img/codes_plot_output/output_35_0.png)
+![png](output_35_0.png)
 
 
 We got exactly the same plot as expected. Now let's kernelizing our funcitons by use the RBF as our convariace. 
@@ -331,7 +318,7 @@ plt.show()
 ```
 
 
-![png](/img/codes_plot_output/output_38_0.png)
+![png](output_38_0.png)
 
 
 We get much smoother lines and looks even more like functions. When the dimension of Gaussian gets larger, there is no need to connect points. When the dimension become infinity, there is a point represents any possible input. Let's plot `m=200` samples of `n=200`<img src="/tex/9a147fe833cc6eda5be947035d6cc8aa.svg?invert_in_darkmode&sanitize=true" align=middle width=26.851664399999994pt height=22.465723500000017pt/> Gaussian to get a feeling of functions with infinity parameters.  
@@ -369,34 +356,15 @@ plt.show()
 
 
 
-![png](/img/codes_plot_output/output_40_1.png)
+![png](output_40_1.png)
 
 
 As we can see above, when we increase the dimension of Gaussian to infinity, we can sample all the possible points in our region of interest. 
-
-A great visualization animation of points covariance of the "functions" [10].
-
-<div id="image-table">
-    <table>
-	    <tr>
-    	    <td style="padding:10px">
-        	    <img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/2points_covariance.gif?raw=1" width="500"/>
-      	    </td>
-            <td style="padding:10px">
-            	<img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/4points_covariance.gif?raw=1" width="500"/>
-            </td>
-        </tr>
-    </table>
-</div> 
-
----
 
 Here we talk a little bit about **Parametric and Nonparametric model**. You can skip this section without compromising your Gaussian Process understandings. 
 
 Parametric models assume that the data distribution can be modeled in terms of a set of finite number parameters. For regression, we have some data points, and we would like to make predictions of the value of <img src="/tex/0e241c321e18ed6141f9a47d8095bebd.svg?invert_in_darkmode&sanitize=true" align=middle width=62.56467194999998pt height=24.65753399999998pt/> with a specific <img src="/tex/332cc365a4987aacce0ead01b8bdcc0b.svg?invert_in_darkmode&sanitize=true" align=middle width=9.39498779999999pt height=14.15524440000002pt/>. If we assume a linear regression model, <img src="/tex/eab7fea88470156cd8aa3e8c1a13158b.svg?invert_in_darkmode&sanitize=true" align=middle width=90.23571974999999pt height=22.831056599999986pt/>, we need to find the parameters <img src="/tex/edcbf8dd6dd9743cceeee21183bbc3b6.svg?invert_in_darkmode&sanitize=true" align=middle width=14.269439249999989pt height=22.831056599999986pt/> and <img src="/tex/f1fe0aebb1c952f09cdbfd83af41f50e.svg?invert_in_darkmode&sanitize=true" align=middle width=14.269439249999989pt height=22.831056599999986pt/> to define the line. In many cases, the linear model assumption isn’t hold, a polynomial model with more parameters, such as <img src="/tex/66e114b7f1f95026b004600d3d19c953.svg?invert_in_darkmode&sanitize=true" align=middle width=141.36579765pt height=26.76175259999998pt/> is needed. We use the training dataset <img src="/tex/78ec2b7008296ce0561cf83393cb746d.svg?invert_in_darkmode&sanitize=true" align=middle width=14.06623184999999pt height=22.465723500000017pt/> of <img src="/tex/55a049b8f161ae7cfeb0197d75aff967.svg?invert_in_darkmode&sanitize=true" align=middle width=9.86687624999999pt height=14.15524440000002pt/> observations, <img src="/tex/cad3b7fb49f21edeede8aeb09c8ede11.svg?invert_in_darkmode&sanitize=true" align=middle width=185.8496904pt height=24.65753399999998pt/> to train the model, i.e. mapping <img src="/tex/332cc365a4987aacce0ead01b8bdcc0b.svg?invert_in_darkmode&sanitize=true" align=middle width=9.39498779999999pt height=14.15524440000002pt/> to <img src="/tex/deceeaf6940a8c7a5a02373728002b0f.svg?invert_in_darkmode&sanitize=true" align=middle width=8.649225749999989pt height=14.15524440000002pt/> through parameters <img src="/tex/bacd6bdf70fdf933f86310421df0ab2b.svg?invert_in_darkmode&sanitize=true" align=middle width=107.37431924999999pt height=24.65753399999998pt/>. After the training process, we assume all the information of the data are captured by the feature parameters <img src="/tex/b35e24d8a08c0ab01195f2ad2a78fab7.svg?invert_in_darkmode&sanitize=true" align=middle width=12.785434199999989pt height=22.465723500000017pt/>, thus the prediction is independent of the training data <img src="/tex/78ec2b7008296ce0561cf83393cb746d.svg?invert_in_darkmode&sanitize=true" align=middle width=14.06623184999999pt height=22.465723500000017pt/>. It can be expressed as  <img src="/tex/91b69274abea319e9035079407c050a9.svg?invert_in_darkmode&sanitize=true" align=middle width=225.68921594999998pt height=24.65753399999998pt/>, in which <img src="/tex/4d00376b927ae39d0a206dc721cfc59f.svg?invert_in_darkmode&sanitize=true" align=middle width=14.783181599999988pt height=22.831056599999986pt/> is the prediction made at a unobserved point <img src="/tex/3c832332166b20f879ddebdf25829927.svg?invert_in_darkmode&sanitize=true" align=middle width=16.13018219999999pt height=14.15524440000002pt/>. 
 Thus, conducting regression using the parametric model, the complexity or flexibility of model is limited by the parameter numbers. It’s natural to think to use a model that the number of parameters grows with the size of the dataset, and it’s a Bayesian non-parametric model. Bayesian non-parametric model do not imply that there are no parameters, but rather infinitely parameters. 
-
----
 
 To generate correlated normally distributed random samples, one can first generate uncorrelated samples, and then multiply them
 by a matrix *L* such that <img src="/tex/3a7e011fcce2798d8f8a0d1c26dc920c.svg?invert_in_darkmode&sanitize=true" align=middle width=69.7847139pt height=27.6567522pt/>, where *K* is the desired covariance matrix. *L* can be created, for example, by using 
@@ -423,7 +391,7 @@ plt.show()
 ```
 
 
-![png](/img/codes_plot_output/output_44_0.png)
+![png](output_44_0.png)
 
 
 ## III. Math
@@ -515,7 +483,7 @@ plt.show()
 ```
 
 
-![png](/img/codes_plot_output/output_59_0.png)
+![png](output_59_0.png)
 
 
 
@@ -575,7 +543,7 @@ plt.show()
 ```
 
 
-![png](/img/codes_plot_output/output_62_0.png)
+![png](output_62_0.png)
 
 
 
@@ -600,7 +568,7 @@ plt.show()
 
 
 
-![png](/img/codes_plot_output/output_63_1.png)
+![png](output_63_1.png)
 
 
 We plotted `m=40` samples from the Gaussian Process posterior together with the mean function for prediction and the observation data points (training dataset). It's clear all posterior functions collapse at all observation points. 
@@ -614,28 +582,7 @@ where <img src="/tex/127335a9fdbeac98b11620d6cfd8ecea.svg?invert_in_darkmode&san
 
 More complex kernel functions can be selected to depend on the specific tasks. More information about choosing the kernel/covariance function for a Gaussian process can be found in `The Kernel Cookbook` [8]. 
 
-## V. GP Packages
-
-There are several packages or frameworks available to conduct Gaussian Process Regression. In this section, I will summarize my initial impression after trying several of them written in Python. 
-
-A lightweight one is [sklearn.gaussian_process](https://scikit-learn.org/stable/modules/gaussian_process.html), simple implementation like the example above can be quickly conducted. Just for gaining more implementation understandings of GP after the above simple implementation example. It's too vague for understanding GP theory purpose. 
-
-GPR is computationally expensive in high dimensional spaces (features more than a few dozens) due to the fact it uses the whole samples/features to do the predictions. The more observations, the more computations are needed for predictions. A package that includes state-of-the-art algorithm implementations is preferred for efficient implementation of complex GPR tasks.
-
-One of the most well-known GP frameworks is [GPy](https://sheffieldml.github.io/GPy/). GPy has been developed pretty maturely with well-documented explanations. GPy uses NumPy to perform all its computations. For tasks that don't require heavy computations and very up-to-date algorithm implementations, GPy is sufficient and the more stable. 
-
-For bigger computation required GPR tasks, GPU acceleration are especially preferred. [GPflow](https://www.gpflow.org/) origins from GPy, and much of the interface is similar. GPflow leverages **TensorFlow** as its computational backend. More technical difference between GPy and GPflow frameworks is [here](https://gpflow.readthedocs.io/en/master/intro.html#what-s-the-difference-between-gpy-and-gpflow). 
-
-[GPyTorch](https://gpytorch.ai/) is another framework that provides GPU acceleration through **PyTorch**. It contains very up-to-date GP algorithms. Similar to GPflow, GPyTorch provides automatic gradients. So complex models such as embedding deep NNs in GP models can be easier developed. 
-
-After going through docs quickly and implementing basic GPR tutorials of [GPyTorch](https://github.com/jwangjie/gpytorch/blob/master/examples/01_Exact_GPs/Simple_GP_Regression.ipynb) and [GPflow](https://github.com/jwangjie/gpytorch/blob/master/examples/01_Exact_GPs/Simple_GP_Regression_GPflow.ipynb), my impression is using GPyTorch is more automatic and GPflow has more controls. The impression may also come from the usage experience with TensorFlow and PyTorch. 
-
-Check and run my ***modified*** GPR tutorials of 
-* [GPyTorch](https://github.com/jwangjie/gpytorch/blob/master/examples/01_Exact_GPs/Simple_GP_Regression.ipynb) 
-
-* [GPflow](https://github.com/jwangjie/gpytorch/blob/master/examples/01_Exact_GPs/Simple_GP_Regression_GPflow.ipynb)
-
-## VI. Summary
+## V. Summary
 
 A Gaussian process (GP) is a probability distribution over possible functions that fit a set of points. [1] GPs are nonparametric models that model the function directly. Thus, GP provides a distribution (with uncertainty) for the prediction value rather than just one value as the prediction. In robot learning, quantifying uncertainty can be extremely valuable to achieve an efficient learning process. The areas with least certain should be explored next. This is the main idea behind Bayesian optimization. [9] Moreover, prior knowledge and specifications about the shape of the model can be added by selecting different kernel functions. [1] Priors can be specified based on criteria including if the model is smooth, if it is sparse, if it is able to change drastically, and if it need to be differentiable.
 
@@ -647,23 +594,23 @@ A Gaussian process (GP) is a probability distribution over possible functions th
 
 ## Reference
 
-[1] C. E. Rasmussen and C. K. I. Williams, Gaussian processes for machine learning. MIT Press, 2006.
+[1]	C. E. Rasmussen and C. K. I. Williams, Gaussian processes for machine learning. MIT Press, 2006.
 
 [2] R. Turner, “ML Tutorial: Gaussian Processes - YouTube,” 2017. [Online]. Available: https://www.youtube.com/watch?v=92-98SYOdlY&feature=emb_title.
 
 [3] A. Ng, “Multivariate Gaussian Distribution - Stanford University | Coursera,” 2015. [Online]. Available: https://www.coursera.org/learn/machine-learning/lecture/Cf8DF/multivariate-gaussian-distribution.
 
-[4] D. Lee, “Multivariate Gaussian Distribution - University of Pennsylvania | Coursera,” 2017. [Online]. Available: https://www.coursera.org/learn/robotics-learning/lecture/26CFf/1-3-1-multivariate-gaussian-distribution.
+[4]	D. Lee, “Multivariate Gaussian Distribution - University of Pennsylvania | Coursera,” 2017. [Online]. Available: https://www.coursera.org/learn/robotics-learning/lecture/26CFf/1-3-1-multivariate-gaussian-distribution.
 
-[5] F. Dai, Machine Learning Cheat Sheet: Classical equations and diagrams in machine learning. 2017.
+[5]	F. Dai, Machine Learning Cheat Sheet: Classical equations and diagrams in machine learning. 2017.
 
-[6] N. de Freitas, “Machine learning - Introduction to Gaussian processes - YouTube,” 2013. [Online]. Available: https://www.youtube.com/watch?v=4vGiHC35j9s&t=1424s.
+[6]	N. de Freitas, “Machine learning - Introduction to Gaussian processes - YouTube,” 2013. [Online]. Available: https://www.youtube.com/watch?v=4vGiHC35j9s&t=1424s.
 
-[7] Y. Shi, “Gaussian Process, not quite for dummies,” 2019. [Online]. Available: https://yugeten.github.io/posts/2019/09/GP/.
+[7]	Y. Shi, “Gaussian Process, not quite for dummies,” 2019. [Online]. Available: https://yugeten.github.io/posts/2019/09/GP/.
 
-[8] D. Duvenaud, “Kernel Cookbook,” 2014. [Online]. Available: https://www.cs.toronto.edu/~duvenaud/cookbook/.
+[8]	D. Duvenaud, “Kernel Cookbook,” 2014. [Online]. Available: https://www.cs.toronto.edu/~duvenaud/cookbook/.
 
-[9] Y. Gal, “What my deep model doesn’t know.,” 2015. [Online]. Available: http://mlg.eng.cam.ac.uk/yarin/blog_3d801aa532c1ce.html.
+[9]	Y. Gal, “What my deep model doesn’t know.,” 2015. [Online]. Available: http://mlg.eng.cam.ac.uk/yarin/blog_3d801aa532c1ce.html.
 
 ## Appendix A
 
@@ -734,5 +681,5 @@ plt.show()
 ```
 
 
-![png](/img/codes_plot_output/output_72_0.png)
+![png](output_72_0.png)
 
