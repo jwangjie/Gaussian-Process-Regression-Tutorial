@@ -1,5 +1,5 @@
 
-# An Intuitive Tutorial to Gaussian Processes Regression
+## An Intuitive Tutorial to Gaussian Processes Regression
 
 [Jie Wang](mailto:jie.wang@queensu.ca), [Offroad Robotics](https://offroad.engineering.queensu.ca/), Queen's University, Kingston, Canada
 
