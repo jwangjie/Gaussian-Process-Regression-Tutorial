@@ -1,0 +1,91 @@
+\begin{thebibliography}{10}
+
+\bibitem{gpss2019}
+Zhenwen Dai.
+\newblock Gpss2019 - computationally efficient gps.
+
+\bibitem{de2017gpflow}
+Alexander~G De~G.~Matthews, Mark Van Der~Wilk, Tom Nickson, Keisuke Fujii,
+  Alexis Boukouvalas, Pablo Le{\'o}n-Villagr{\'a}, Zoubin Ghahramani, and James
+  Hensman.
+\newblock Gpflow: A gaussian process library using tensorflow.
+\newblock {\em The Journal of Machine Learning Research}, 18(1):1299--1304,
+  2017.
+
+\bibitem{Deisenroth2015}
+Marc~Peter Deisenroth, Dieter Fox, and Carl~Edward Rasmussen.
+\newblock {Gaussian processes for data-efficient learning in robotics and
+  control}.
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  37(2):408--423, feb 2015.
+
+\bibitem{duvenaud2014automatic}
+David Duvenaud.
+\newblock {\em Automatic model construction with Gaussian processes}.
+\newblock PhD thesis, University of Cambridge, 2014.
+
+\bibitem{frigola2013bayesian}
+Roger Frigola, Fredrik Lindsten, Thomas~B Sch{\"o}n, and Carl~Edward Rasmussen.
+\newblock Bayesian inference and learning in gaussian process state-space
+  models with particle mcmc.
+\newblock In {\em Advances in Neural Information Processing Systems}, pages
+  3156--3164, 2013.
+
+\bibitem{fuentes2020autonomous}
+R~Fuentes, P~Gardner, C~Mineo, TJ~Rogers, SG~Pierce, K~Worden, N~Dervilis, and
+  EJ~Cross.
+\newblock Autonomous ultrasonic inspection using bayesian optimisation and
+  robust outlier analysis.
+\newblock {\em Mechanical Systems and Signal Processing}, 145:106897, 2020.
+
+\bibitem{gardner2018gpytorch}
+Jacob~R Gardner, Geoff Pleiss, David Bindel, Kilian~Q Weinberger, and
+  Andrew~Gordon Wilson.
+\newblock Gpytorch: Blackbox matrix-matrix gaussian process inference with gpu
+  acceleration.
+\newblock In {\em Advances in Neural Information Processing Systems}, 2018.
+
+\bibitem{Girard2002}
+Agathe Girard, Carl~Edward Rasmussen, Joaquin~Qui{\~{n}}onero Qui˜,
+  Qui{\~{n}}onero Candela, and Roderick Murray-Smith.
+\newblock {Gaussian Process Priors With Uncertain Inputs Application to
+  Multiple-Step Ahead Time Series Forecasting}.
+\newblock In {\em Advances in Neural Information Processing Systems 15 (NIPS
+  2002)}, 2002.
+
+\bibitem{Hewing2020}
+Lukas Hewing, Kim~P. Wabersich, Marcel Menner, and Melanie~N. Zeilinger.
+\newblock {Learning-Based Model Predictive Control: Toward Safe Learning in
+  Control}.
+\newblock {\em Annual Review of Control, Robotics, and Autonomous Systems},
+  3(1), may 2020.
+
+\bibitem{Kabzan2019}
+Juraj Kabzan, Lukas Hewing, Alexander Liniger, and Melanie~N. Zeilinger.
+\newblock {Learning-Based Model Predictive Control for Autonomous Racing}.
+\newblock {\em IEEE Robotics and Automation Letters}, 4(4):3363--3370, oct
+  2019.
+
+\bibitem{Murphy2012}
+Kevin~P Murphy.
+\newblock {\em {Machine Learning A Probabilistic Perspective}}.
+\newblock 2012.
+
+\bibitem{Ostafew2016}
+Chris~J. Ostafew, Angela~P. Schoellig, Timothy~D. Barfoot, and Jack Collier.
+\newblock {Learning-based Nonlinear Model Predictive Control to Improve
+  Vision-based Mobile Robot Path Tracking}.
+\newblock {\em Journal of Field Robotics}, 33(1):133--152, jan 2016.
+
+\bibitem{Rasmussen2006}
+Carl~Edward Rasmussen and Christopher K.~I. Williams.
+\newblock {\em {Gaussian Processes for Machine Learning}}.
+\newblock 2006.
+
+\bibitem{snelson2006sparse}
+Edward Snelson and Zoubin Ghahramani.
+\newblock Sparse gaussian processes using pseudo-inputs.
+\newblock In {\em Advances in neural information processing systems}, pages
+  1257--1264, 2006.
+
+\end{thebibliography}
