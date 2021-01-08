@@ -677,6 +677,11 @@ A Gaussian process (GP) is a probability distribution over possible functions th
 
 [9] Y. Gal, “What my deep model doesn’t know.,” 2015. [Online]. Available: http://mlg.eng.cam.ac.uk/yarin/blog_3d801aa532c1ce.html.
 
+[10] J. Hensman, "Gaussians." 2019. [Online]. Available: https://github.com/mlss-2019/slides/blob/master/gaussian_processes/presentation_links.md.
+
+[11] Z. Dai, "GPSS2019 - Computationally efficient GPs" 2019. [Online]. Available: https://www.youtube.com/watch?list=PLZ_xn3EIbxZHoq8A3-2F4_rLyy61vkEpU&v=7mCfkIuNHYw.
+
+
 ## Appendix A
 
 Visualizing 3D plots of a <img src="/tex/7c91fa1fa7be856b248f729bd78b5f6f.svg?invert_in_darkmode&sanitize=true" align=middle width=42.376631549999985pt height=22.465723500000017pt/> Gaussian by [Visualizing the bivariate Gaussian distribution](https://scipython.com/blog/visualizing-the-bivariate-gaussian-distribution/). 
