@@ -5,7 +5,7 @@
 
 The notebook can be executed at
 
-<a href="https://colab.research.google.com/github/jwangjie/An-Intuitive-Tutorial-to-Gaussian-Processes-Regression/blob/master/gpr_tutorial.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://colab.research.google.com/github/jwangjie/Gaussian-Processes-Regression-Tutorial/blob/master/gpr_tutorial.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 #### A [formal paper](https://arxiv.org/abs/2009.10862) of the notebook:
 ```
