@@ -435,7 +435,7 @@ This is modeling a joint distribution $p(\mathbf{f}, \mathbf{f}_* \, \vert \, \m
 <img src="https://github.com/jwangjie/Gaussian-Process-be-comfortable-using-it/blob/master/img/mvn_theorem.png?raw=1" width="420"/> 
 
 We got eqn. 2.19 [1] 
-$$\mathbf{f}_* \, \vert \, \mathbf{f}, \mathbf{X}, \mathbf{X}_* \sim \mathcal{N} (\mathbf{K}_*^T \mathbf{K} \mathbf{f}, \: \mathbf{K}_{**}-\mathbf{K}_*^T \mathbf{K}^{-1} \mathbf{K}_*) $$
+$$\mathbf{f}_* \, \vert \, \mathbf{f}, \mathbf{X}, \mathbf{X}_* \sim \mathcal{N} (\mathbf{K}_*^T \mathbf{K}^{-1} \mathbf{f}, \: \mathbf{K}_{**}-\mathbf{K}_*^T \mathbf{K}^{-1} \mathbf{K}_*) $$
 
 It is realistic modelling situations that we do not have access to function values themselves, but only noisy versions thereof $y = f(x) + \epsilon$. Assuming additive independent identically distributed Gaussian noise with
 variance $\sigma_n^2$, the prior on the noisy observations becomes $cov(y) = \mathbf{K} + \sigma_n^2\mathbf{I}$. The joint distribution of the observed target values and the function values at the test locations under the prior as [1]
