@@ -1,0 +1,57 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{Rasmussen2006}
+C.~E. Rasmussen, C.~K.~I. Williams, {Gaussian Processes for Machine Learning},
+  The MIT Press, 2006.
+
+\bibitem{ghahramani2011tutorial}
+Z.~Ghahramani, {A Tutorial on Gaussian Processes (or why I don’t use SVMs)},
+  in: {Machine Learning Summer School (MLSS)}, 2011.
+
+\bibitem{Murphy2012}
+K.~P. Murphy, {Machine Learning: A Probabilistic Perspective}, The MIT Press,
+  2012.
+
+\bibitem{duvenaud2014automatic}
+D.~Duvenaud, {Automatic model construction with Gaussian processes}, Ph.D.
+  thesis, University of Cambridge (2014).
+
+\bibitem{duvenaud2016kernel}
+D.~Duvenaud, {The Kernel Cookbook}, Available at
+  \url{https://www.cs.toronto.edu/~duvenaud/cookbook}.
+
+\bibitem{gpss2019}
+Z.~Dai, {Computationally efficient GPs}, in: {Gaussian Process Summer School
+  (GPSS)}, 2019.
+
+\bibitem{chen2018priors}
+Z.~Chen, B.~Wang, {How priors of initial hyperparameters affect Gaussian
+  process regression models}, Neurocomputing 275 (2018) 1702--1710.
+
+\bibitem{de2017gpflow}
+A.~G. De~G.~Matthews, M.~Van Der~Wilk, T.~Nickson, K.~Fujii, A.~Boukouvalas,
+  P.~Le{\'o}n-Villagr{\'a}, Z.~Ghahramani, J.~Hensman, {GPflow: A Gaussian
+  process library using TensorFlow}, The Journal of Machine Learning Research
+  18~(1) (2017) 1299--1304.
+
+\bibitem{gardner2018gpytorch}
+J.~R. Gardner, G.~Pleiss, D.~Bindel, K.~Q. Weinberger, A.~G. Wilson, {GPyTorch:
+  Blackbox Matrix-Matrix Gaussian Process Inference with GPU Acceleration}, in:
+  Advances in Neural Information Processing Systems, 2018.
+
+\bibitem{frigola2013bayesian}
+R.~Frigola, F.~Lindsten, T.~B. Sch{\"o}n, C.~E. Rasmussen, {Bayesian Inference
+  and Learning in Gaussian Process State-Space Models with Particle MCMC}, in:
+  Advances in Neural Information Processing Systems, 2013, pp. 3156--3164.
+
+\bibitem{liu2020gaussian}
+H.~Liu, Y.-S. Ong, X.~Shen, J.~Cai, {When Gaussian process meets big data: A
+  review of scalable GPs}, IEEE Transactions on Neural Networks and Learning
+  Systems (2020).
+
+\end{thebibliography}
