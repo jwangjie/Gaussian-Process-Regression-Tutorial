@@ -7,7 +7,7 @@ The notebook can be executed at
 
 <a href="https://colab.research.google.com/github/jwangjie/Gaussian-Processes-Regression-Tutorial/blob/master/gpr_tutorial.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
-#### A [formal paper](https://arxiv.org/abs/2009.10862) of the notebook:
+### A [formal paper](https://arxiv.org/abs/2009.10862) of the notebook:
 ```
 @misc{wang2020intuitive,
     title={An Intuitive Tutorial to Gaussian Processes Regression},
@@ -18,6 +18,8 @@ The notebook can be executed at
     primaryClass={stat.ML}
 }
 ```
+#### This README.MD is a bit out of date, please refer to the notebook at  <a href="https://colab.research.google.com/github/jwangjie/Gaussian-Processes-Regression-Tutorial/blob/master/gpr_tutorial.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> ####
+
 
 The audience of this tutorial is the one who wants to use GP but not feels comfortable using it. This happens to me after finishing reading the first two chapters of the textbook **Gaussian Process for Machine Learning** [[1](#Reference)]. There is a gap between the usage of GP and feel comfortable using it due to the difficulties in understanding the theory. When I was reading the textbook and watching tutorial videos online, I can follow the majority without too many difficulties. The content kind of makes sense to me. But even when I am trying to talk to myself what GP is, the big picture is blurry. After keep trying to understand GP from various recourses, including textbooks, blog posts, and open-sourced codes, I get my understandings sorted and summarize them up from my perspective. 
 
