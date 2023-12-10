@@ -1,5 +1,5 @@
 
-## An Intuitive Tutorial to Gaussian Processes Regression
+## An Intuitive Tutorial to Gaussian Process Regression
 
 [Jie Wang](http://jiewang.name)
 
