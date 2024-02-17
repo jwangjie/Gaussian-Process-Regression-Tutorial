@@ -9,13 +9,15 @@ The notebook can be executed at
 
 ### A [formal paper](https://arxiv.org/abs/2009.10862) of the notebook:
 ```
-@misc{wang2020intuitive,
-    title={An Intuitive Tutorial to Gaussian Processes Regression},
-    author={Jie Wang},
-    year={2020},
-    eprint={2009.10862},
-    archivePrefix={arXiv},
-    primaryClass={stat.ML}
+@article{wang2023intuitive,
+  title={An intuitive tutorial to {Gaussian} process regression},
+  author={Wang, Jie},
+  journal={Computing in Science \& Engineering},
+  volume={25},
+  number={4},
+  pages={4--11},
+  year={2023},
+  publisher={IEEE}
 }
 ```
 #### This README.MD is a bit out of date, please refer to the notebook at  <a href="https://colab.research.google.com/github/jwangjie/Gaussian-Processes-Regression-Tutorial/blob/master/gpr_tutorial.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> ####
